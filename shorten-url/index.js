@@ -35,18 +35,32 @@ app.use('/user', userRoute)
 app.use('/', checkAuth, staticRouter)
 
 app.get('/url/:shortId', async (req, res) => {
-  const shortId = req.params.shortId
-  const entry = await URL.findOneAndUpdate(
-    { shortId },
-    {
-      $push: {
-        visitHistory: {
-          timeStamps: Date.now(),
+  try {
+    const shortId = req.params.shortId
+    const entry = await URL.findOneAndUpdate(
+      { shortId },
+      {
+        $push: {
+          visitHistory: {
+            timeStamps: Date.now(),
+          },
         },
-      },
+      }
+    )
+
+    if (!entry) {
+      return res.status(404).render('error', {
+        error: 'Short URL not found'
+      })
     }
-  )
-  res.redirect(entry.redirectURL)
+
+    res.redirect(entry.redirectURL)
+  } catch (error) {
+    console.error('URL redirect error:', error)
+    res.status(500).render('error', {
+      error: 'Failed to redirect to URL'
+    })
+  }
 })
 
 app.listen(PORT, () => console.log(`Server started at PORT ${PORT}`))
