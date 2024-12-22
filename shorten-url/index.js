@@ -10,9 +10,9 @@ const urlRoute = require('./routes/url')
 const userRoute = require('./routes/user')
 
 const app = express()
-const PORT = 8001
+const PORT = process.env.PORT || 8001
 
-connectMongoDb('mongodb://127.0.0.1:27017/short-url')
+connectMongoDb(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/short-url')
 
 app.set('view engine', 'ejs')
 app.set('views', path.resolve('./views'))
