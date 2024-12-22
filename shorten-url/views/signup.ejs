@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <style>
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-    </style>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Signup</title>
-  </head>
-  <body>
-    <h1>Sign Up</h1>
-    <form method="post" action="/user">
-      <label>Full Name</label>
-      <input type="text" required name="name" />
+<%- include('partials/header') %>
 
-      <label>Email</label>
-      <input type="text" required name="email" />
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="container-card">
+        <h1 class="text-center mb-4">Sign Up</h1>
+        <form action="/user" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+        </form>
+        <p class="text-center mt-3">
+            Already have an account? <a href="/login">Login</a>
+        </p>
+    </div>
+</div>
 
-      <label>Password</label>
-      <input type="password" required name="password" />
-
-      <button type="submit">Signup</button>
-    </form>
-  </body>
+</body>
 </html>

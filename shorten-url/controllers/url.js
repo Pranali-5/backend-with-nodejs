@@ -5,6 +5,7 @@ async function handleGenerateNewShortUrl(req, res) {
   const body = req.body
   if (!body.url) return res.status(400).json({ error: 'url is required' })
   const shortID = shortid.generate()
+ const allUrls = await URL.find({})
   await URL.create({
     shortId: shortID,
     redirectURL: body.url,
@@ -12,7 +13,7 @@ async function handleGenerateNewShortUrl(req, res) {
     createdBy: req.user._id,
   })
 
-  return res.render('home', { id: shortID })
+  return res.render('home', { id: shortID,  urls: allUrls, })
 
   //   return res.json({ id: shortID })
 }

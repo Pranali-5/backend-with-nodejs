@@ -17,7 +17,7 @@ connectMongoDb('mongodb://127.0.0.1:27017/short-url')
 app.set('view engine', 'ejs')
 app.set('views', path.resolve('./views'))
 
-app.get('/test', async (req, res) => {
+app.get('/url', async (req, res) => {
   const allUrls = await URL.find({})
   return res.render('home', {
     urls: allUrls,
